@@ -271,6 +271,8 @@ class mainClass
 
                 case 5:
                     Console.Clear();
+                    Console.WriteLine("Grazie per aver giocato!");
+                    Console.WriteLine("Ci vediamo la prossima volta");
                     mainMenu = false;
                     break;
 
