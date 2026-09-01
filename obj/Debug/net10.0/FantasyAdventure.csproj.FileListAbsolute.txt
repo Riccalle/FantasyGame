@@ -1,0 +1,14 @@
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\bin\Debug\net10.0\FantasyAdventure.exe
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\bin\Debug\net10.0\FantasyAdventure.deps.json
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\bin\Debug\net10.0\FantasyAdventure.runtimeconfig.json
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\bin\Debug\net10.0\FantasyAdventure.dll
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\bin\Debug\net10.0\FantasyAdventure.pdb
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.AssemblyInfoInputs.cache
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.AssemblyInfo.cs
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.csproj.CoreCompileInputs.cache
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.dll
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\refint\FantasyAdventure.dll
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.pdb
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\FantasyAdventure.genruntimeconfig.cache
+C:\Users\ricca\OneDrive\visual studio code\FantasyAdventure\obj\Debug\net10.0\ref\FantasyAdventure.dll

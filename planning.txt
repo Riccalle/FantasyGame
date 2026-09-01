@@ -1,0 +1,277 @@
+--- PLANNING ---
+
+1. Interfaccia utente 
+
+---- BENVENUTO IN NOMEGIOCO ----
+    Cosa vuoi fare
+1. Scegli una gilda
+2. Crea una gilda
+3. Guarda tutte le gilde
+4. Elimina una gilda
+5. Esci
+
+SCELTE POSSIBILI
+
+1. Scegli una gilda 
+
+- Se non hai gilde:
+"Non hai una gilda"
+"Creane una dal menù"
+
+- Se hai una gilda:
+Stampa tutte le gilde
+"Inserisci il nome della gilda a cui accedere"
+
+- Inserisce il nome 
+
+---- BENVENUTO IL NOMEGILDA ----
+    Cosa vuoi fare
+1. Avvia missioni
+2. Guarda inventari
+3. Tavolo degli incantesimi
+4. Livella oggetti
+5. Esci
+
+2. Personaggi
+
+1. Arciere
+2. Mago
+3. Curatore
+4. Guerriero
+5. Ladro
+
+------------------------------------------------
+
+Inventario:
+2 slot armi
+1 slot armatura
+1 slot arma di riferimento
+
+------------------------------------------------
+
+1. Arciere:
+affinità meelee: 0.3
+affinità range: 1
+affinità magie: 0.5
+frequenza critici: 0.1
+
+salute: 50
+
+-------------------------------------------------
+
+2. Mago:
+affinità meelee: 0.2
+affinità range: 0.65
+affinità magie: 1
+frequenza critici: 0.05
+
+salute: 60
+
+------------------------------------------------
+
+3. Curatore:
+affinità meelee: 0.7
+affinità range: 0.3
+affinità magie: 0.75
+frequenza critici: 0
+
+salute: 60
+
+------------------------------------------------
+
+4. Guerriero:
+affinità meelee: 1
+affinità range: 0.4
+affinità magie: 0.1
+frequenza critici: 0.1
+
+salute: 100
+
+------------------------------------------------
+
+5. Ladro:
+affinità meelee: 0.8
+affinità range: 0.7
+affinità magie: 0.3
+frequenza critici: 0.2
+
+salute: 80
+
+------------------------------------------------
+
+Armi:
+
+level up: danno iniziale + 2 * livello * (livello - 1)
+
+- ARCHI
+
+    arco lungo:
+        danno: 100
+        peso: 5
+
+    arco corto:
+        danno: 65
+        peso: 3
+
+    arco pesante:
+        danno: 160
+        peso: 10
+
+    arco riflesso:
+        danno: 150
+        peso: 7
+
+    arco composto:
+        danno: 190
+        peso: 8
+
+- BALESTRE
+
+    balestra leggera:
+        danno: 65
+        peso: 4
+
+    balestra multifreccia:
+        danno: 70
+        peso: 7
+        // farebbe il minigioco 1 - 3 volte (dipende dal numero di nemici) ogni volta piu difficile
+    
+    balestra pesante:
+        danno: 200
+        peso: 15
+
+- STAFFE
+
+    vecchio bastone:
+        danno: 70
+        peso: 7
+        throwability: 0.2
+
+    staffa da apprendista:
+        danno: 100
+        peso: 6
+        throwability: 0.3
+
+    staffa da stregone:
+        danno: 140
+        peso: 6
+        throwability: 0.3
+
+- SPADE
+
+    spada corta:
+        danno: 100
+        peso: 5
+        throwability: 0.6
+
+    macete:
+        danno: 110
+        peso: 7
+        throwability: 0.25
+
+    sciabola:
+        danno: 115
+        peso: 6
+        throwability: 0.3
+
+    spada da soldato:
+        danno: 130
+        peso: 7
+        throwability: 0.5
+
+    spada da cavaliere:
+        danno: 180
+        peso: 8
+        throwability: 0.5
+
+    spada da guardia reale:
+        danno: 220
+        peso: 10
+        throwability: 0.5
+
+- ASCE
+
+    ascia da boscaiolo:
+        danno: 150
+        peso: 8
+        throwability: 0.3
+
+    ascia da vichingo:
+        danno: 200
+        peso: 12
+        throwability: 0.8
+
+    ascia lanciabile:
+        danno: 150
+        peso: 7
+        throwability: 1.1
+
+- ALABARDA
+
+    alabarda da guardia cittadina:
+        danno: 100
+        peso: 6
+        throwability: 0.4
+    
+    alabarda da soldato:
+        danno: 130
+        peso: 9
+        throwability: 0.5
+    
+    alabarda da guardia reale:
+        danno: 220
+        peso: 13
+        throwability: 0.5
+
+- LANCE
+
+    forcone:
+        danno: 90
+        peso: 6
+        throwability: 0.2
+
+    giavellotto:
+        danno: 80
+        peso: 3
+        throwability: 1.5
+
+    lancia da cacciatore:
+        danno: 120
+        peso: 8
+        throwability: 0.7
+
+    lancia da assedio:
+        danno: 150
+        peso: 10
+        throwability: 0.7
+
+- PUGNALI
+
+    coltelli da cucina:
+        danno: 60
+        peso: 5
+        throwability: 0.4
+
+    coltello a spinta:
+        danno: 60
+        peso: 1
+        throwability: 1
+
+    pugnale da borseggiatore:
+        danno: 80
+        peso: 3
+        throwability: 0.6
+
+    quadrello medievale:
+        danno: 100
+        peso: 4
+        throwability: 0.5
+
+    daga rinascimentale:
+        danno: 140
+        peso: 4
+        throwability: 0.7
+    
+
+"I'm a white man I'm not a n**gger like Linus I write my own fucking compiler"
+    -  Smartest programmer that's ever lived
