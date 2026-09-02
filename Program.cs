@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Text.Json;
 
 enum TipoDiPersonaggio
 {
@@ -14,8 +15,8 @@ enum TipoDiPersonaggio
 class Personaggio
 {
     public TipoDiPersonaggio tipoPrincipale {get; private set;}
-    public uint Livello = 0;
-    public string Name;
+    public uint Livello {get; set;} = 0;
+    public string Name {get; set;} = "";
 
     public Personaggio(TipoDiPersonaggio tipoPrincipale, string Name)
     {
@@ -26,7 +27,7 @@ class Personaggio
 
 class Gilda
 {
-    public string Name = "";
+    public string Name {get; set;} = "";
     public Personaggio personaggio1 {get; private set;}
     public Personaggio personaggio2 {get; private set;}
     public Personaggio personaggio3 {get; private set;}
@@ -116,8 +117,17 @@ class mainClass
 {
     static void Main(string[] args)
     {
+        string fileDirectory = "SaveFile.json";
+        if (!File.Exists(fileDirectory))
+        {
+            Console.WriteLine("Errore! Non è presente il file di salvataggio!");
+            File.WriteAllText(fileDirectory, "[]");
+        }
+
+        string saveFileContents = File.ReadAllText(fileDirectory);
+
         bool mainMenu = true;
-        List<Gilda> gilde = new List<Gilda>();
+        List<Gilda> gilde = JsonSerializer.Deserialize<List<Gilda>>(saveFileContents);
 
         while(mainMenu)
         {
@@ -129,7 +139,7 @@ class mainClass
             Console.WriteLine("2. Creare gilda");
             Console.WriteLine("3. Eliminare gilda");
             Console.WriteLine("4. Mostra tutte le gilde");
-            Console.WriteLine("5. Esci (sconsigliato)\n");
+            Console.WriteLine("5. Salva ed esci (sconsigliato)\n");
 
             int sceltaPrincipale = Convert.ToInt16(Console.ReadLine());
             switch(sceltaPrincipale)
@@ -273,6 +283,10 @@ class mainClass
                     Console.Clear();
                     Console.WriteLine("Grazie per aver giocato!");
                     Console.WriteLine("Ci vediamo la prossima volta");
+
+                    string contentsToSave = JsonSerializer.Serialize(gilde, new JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(fileDirectory, contentsToSave);
+
                     mainMenu = false;
                     break;
 

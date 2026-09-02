@@ -271,7 +271,31 @@ level up: danno iniziale + 2 * livello * (livello - 1)
         danno: 140
         peso: 4
         throwability: 0.7
-    
 
-"I'm a white man I'm not a n**gger like Linus I write my own fucking compiler"
-    -  Smartest programmer that's ever lived
+------------------------------------------------
+
+    Lore:
+
+
+------------------------------------------------
+
+--- Menu Missioni ---
+
+3 step
+
+1 step:
+
+1. Avvia Missione
+
+    3 missioni:
+
+        Missione 1:
+            - Foresta
+            - Campo
+            - 
+
+
+
+2. Mostra inventario
+
+3. Incanta armi
