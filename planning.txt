@@ -276,7 +276,6 @@ level up: danno iniziale + 2 * livello * (livello - 1)
 
     Lore:
 
-
 ------------------------------------------------
 
 --- Menu Missioni ---

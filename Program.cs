@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text.Json;
+﻿using System.Text.Json;
+using GildaCodice;
+using LibreriaMissioni;
 
 enum TipoDiPersonaggio
 {
@@ -25,95 +24,7 @@ class Personaggio
     }
 }
 
-class Gilda
-{
-    public string Name {get; set;} = "";
-    public Personaggio personaggio1 {get; private set;}
-    public Personaggio personaggio2 {get; private set;}
-    public Personaggio personaggio3 {get; private set;}
-
-    public Gilda(
-        string Name, 
-        Personaggio personaggio1, 
-        Personaggio personaggio2,
-        Personaggio personaggio3
-    )
-    {
-        this.Name = Name;
-        this.personaggio1 = personaggio1;
-        this.personaggio2 = personaggio2;
-        this.personaggio3 = personaggio3;
-    }
-
-    public void StampaInfo()
-    {
-        Console.WriteLine($"Nome gilda: {Name}");
-        Console.WriteLine($"Personaggio 1: {personaggio1.tipoPrincipale}");
-        Console.WriteLine($"Personaggio 2: {personaggio2.tipoPrincipale}");
-        Console.WriteLine($"Personaggio 3: {personaggio3.tipoPrincipale}");
-    }
-
-    public void Menu()
-    {
-        bool menuRunning = true;
-        while (menuRunning)
-        {
-            Console.WriteLine("Cosa vuoi fare");
-            Console.WriteLine("1. Avvia missione");
-            Console.WriteLine("2. Incanta armi");
-            Console.WriteLine("3. Esci");
-
-            int scelta = Convert.ToInt16(Console.ReadLine());
-
-            switch (scelta)
-            {
-                case 1:
-                    break;
-                    
-                case 2:
-                    break;
-
-                case 3:
-                    menuRunning = false;
-                    break;
-            }
-        }
-    }
-
-    public static TipoDiPersonaggio ScegliendoPersonaggio(int n)
-    {
-        bool scegliendoPersonaggio = true;
-        TipoDiPersonaggio tipoDiPersonaggio = TipoDiPersonaggio.Arciere;
-
-        while(scegliendoPersonaggio)
-        {
-            Console.WriteLine($"Inserire il tipo del personaggio {n}");
-            Console.WriteLine("1. Arciere");
-            Console.WriteLine("2. Mago");
-            Console.WriteLine("3. Curatore");
-            Console.WriteLine("4. Guerriero");
-            Console.WriteLine("5. Ladro");
-
-            int scelta = Convert.ToInt16(Console.ReadLine());
-
-            if(scelta < 1 || scelta > 5)
-            {
-                Console.WriteLine("Scelta non valida");
-                continue;
-            }
-
-            else 
-            {
-                tipoDiPersonaggio = (TipoDiPersonaggio)(scelta - 1);
-                scegliendoPersonaggio = false;
-            }
-        }
-
-        return tipoDiPersonaggio;
-    }
-}
-
-class mainClass
+class MainClass
 {
     static void Main(string[] args)
     {
@@ -127,7 +38,7 @@ class mainClass
         string saveFileContents = File.ReadAllText(fileDirectory);
 
         bool mainMenu = true;
-        List<Gilda> gilde = JsonSerializer.Deserialize<List<Gilda>>(saveFileContents);
+        List<Gilda> gilde = JsonSerializer.Deserialize<List<Gilda>>(saveFileContents) ?? new List<Gilda>();
 
         while(mainMenu)
         {
@@ -139,7 +50,7 @@ class mainClass
             Console.WriteLine("2. Creare gilda");
             Console.WriteLine("3. Eliminare gilda");
             Console.WriteLine("4. Mostra tutte le gilde");
-            Console.WriteLine("5. Salva ed esci (sconsigliato)\n");
+            Console.WriteLine("5. Salva ed esci (sconsigliato)");
 
             int sceltaPrincipale = Convert.ToInt16(Console.ReadLine());
             switch(sceltaPrincipale)
@@ -185,18 +96,22 @@ class mainClass
                         while(scegliendoGilda) 
                         {
                             Console.WriteLine("Inserire il nome della gilda");
-                            string gildaNome = Console.ReadLine();
+                            string gildaNome = Console.ReadLine() ?? "";
+                            Gilda? tmp = gilde.Find(x => x.Name == gildaNome); // Controllo se non è null per evitare problemi con l'interpreter
 
-                            while (gilde.Contains(gilde.Find(x => x.Name == gildaNome)))
+                            if (tmp != null) 
                             {
-                                Console.WriteLine("Non puoi creare due gilde con lo stesso nome");
-                                Console.WriteLine("Per favore inserire un nuovo nome");
-                                gildaNome = Console.ReadLine();
+                                while (gilde.Contains(tmp))
+                                {
+                                    Console.WriteLine("Non puoi creare due gilde con lo stesso nome");
+                                    Console.WriteLine("Per favore inserire un nuovo nome");
+                                    gildaNome = Console.ReadLine() ?? "";
+                                }
                             }
 
                             TipoDiPersonaggio tipoDiPersonaggio1 = Gilda.ScegliendoPersonaggio(1);
                             Console.WriteLine("Nome primo personaggio: ");
-                            string name1 = Console.ReadLine();
+                            string name1 = Console.ReadLine() ?? "";
 
                             TipoDiPersonaggio tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(2);
                             while(tipoDiPersonaggio2 == tipoDiPersonaggio1)
@@ -205,7 +120,7 @@ class mainClass
                                 tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(2);
                             }
                             Console.WriteLine("Nome secondo personaggio: ");
-                            string name2 = Console.ReadLine();
+                            string name2 = Console.ReadLine() ?? "";
 
                             TipoDiPersonaggio tipoDiPersonaggio3 = Gilda.ScegliendoPersonaggio(3);
                             while(tipoDiPersonaggio3 == tipoDiPersonaggio2 || tipoDiPersonaggio3 == tipoDiPersonaggio1)
@@ -214,7 +129,7 @@ class mainClass
                                 tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(3);
                             }
                             Console.WriteLine("Nome terzo personaggio: ");
-                            string name3 = Console.ReadLine();
+                            string name3 = Console.ReadLine() ?? "";
 
                             Personaggio personaggio1 = new Personaggio(tipoDiPersonaggio1, name1);
                             Personaggio personaggio2 = new Personaggio(tipoDiPersonaggio2, name2);
@@ -249,14 +164,14 @@ class mainClass
                     }
 
                     Console.WriteLine("Inserire il nome della gilda che si vuole eliminare");
-                    string NomeDaEliminare = Console.ReadLine();
+                    string NomeDaEliminare = Console.ReadLine() ?? "";
 
-                    Gilda gildaDaEliminare = gilde.Find(x => x.Name == NomeDaEliminare);
+                    Gilda? gildaDaEliminare = gilde.Find(x => x.Name == NomeDaEliminare);
 
                     while (gildaDaEliminare == null)
                     {
                         Console.WriteLine("Gilda non trovata");
-                        NomeDaEliminare = Console.ReadLine();
+                        NomeDaEliminare = Console.ReadLine() ?? "";
                         gildaDaEliminare = gilde.Find(x => x.Name == NomeDaEliminare);
                     }
 
