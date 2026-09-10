@@ -1,11 +1,11 @@
+using LibreriaPersonaggi;
+
 namespace GildaCodice
 {
     class Gilda
     {
         public string Name {get; set;} = "";
-        public Personaggio personaggio1 {get; private set;}
-        public Personaggio personaggio2 {get; private set;}
-        public Personaggio personaggio3 {get; private set;}
+        public Personaggio[] Personaggi = new Personaggio[3];
 
         public Gilda(
             string Name, 
@@ -87,7 +87,7 @@ namespace GildaCodice
             return tipoDiPersonaggio;
         }
 
-        public void Attacco()
+        public void Attacca()
         {
             Console.WriteLine("");
         }

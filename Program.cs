@@ -1,28 +1,7 @@
 ﻿using System.Text.Json;
 using GildaCodice;
 using LibreriaMissioni;
-
-enum TipoDiPersonaggio
-{
-    Arciere,
-    Mago,
-    Curatore,
-    Guerriero,
-    Ladro
-}
-
-class Personaggio
-{
-    public TipoDiPersonaggio tipoPrincipale {get; private set;}
-    public uint Livello {get; set;} = 0;
-    public string Name {get; set;} = "";
-
-    public Personaggio(TipoDiPersonaggio tipoPrincipale, string Name)
-    {
-        this.Name = Name;
-        this.tipoPrincipale = tipoPrincipale;
-    }
-}
+using LibreriaPersonaggi;
 
 class MainClass
 {
