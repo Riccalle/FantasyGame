@@ -37,7 +37,7 @@ namespace LibreriaPersonaggi
             // Questa parte serve solo per mettere i frame dentro frames;
             // Volendo lo si può fare anche manualmente
             // ES: frames = {"", "|", "||", ...};
-            for (int i = 0; i < numeroDiFrame; i++) 
+            for (int i = 0; i < numeroDiFrame; i++)
             {
                 string frame = "";
                 int length = i - i % numeroDiFrame / 2; // C# approssima automaticamente la divisione fra interi
@@ -74,6 +74,46 @@ namespace LibreriaPersonaggi
             // "Numero a caso da aggiustare", sommato al danno base passato in input 
 
             return danno;
+        }
+    }
+
+    class Mago : Personaggio
+    {
+        public Mago(string name)
+        {
+            tipoPrincipale = TipoDiPersonaggio.Mago;
+            Livello = 0;
+            Name = name;
+        }
+
+        static int Attacco(int dannoMinimo)
+        {
+            int danno = dannoMinimo;
+            double TempoRimanente = 5; // Tempo rimanente per spammare l'attacco (spacebar)
+            string PotenzaAttacco = "";
+
+            // Logica attacco
+
+            while(TempoRimanente > 0)
+            {
+                Console.Write(TempoRimanente);
+                if(Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+
+                    if(key.Key == Console.KeySpacebar)
+                    {
+                        PotenzaAttacco += "|";
+                        Console.Clear();
+                        ConsoleWrite($"\r{PotenzaAttacco}");
+                    }
+                }
+                TempoRimanente -= 0.01;
+                Thread.Sleep(10);
+            }
+
+            int PotenzaAttacco = PotenzaAttacco.Length();
+            danno += PotenzaAttacco * 2; // Moltiplicatore ignoto
         }
     }
 }
