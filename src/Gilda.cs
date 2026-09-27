@@ -15,17 +15,17 @@ namespace GildaCodice
         )
         {
             this.Name = Name;
-            this.personaggio1 = personaggio1;
-            this.personaggio2 = personaggio2;
-            this.personaggio3 = personaggio3;
+            Personaggi[0] = personaggio1;
+            Personaggi[1] = personaggio2;
+            Personaggi[2] = personaggio3;
         }
 
         public void StampaInfo()
         {
             Console.WriteLine($"Nome gilda: {Name}");
-            Console.WriteLine($"Personaggio 1: {personaggio1.tipoPrincipale}");
-            Console.WriteLine($"Personaggio 2: {personaggio2.tipoPrincipale}");
-            Console.WriteLine($"Personaggio 3: {personaggio3.tipoPrincipale}");
+            Console.WriteLine($"Personaggio 1: {Personaggi[0].tipoPrincipale}");
+            Console.WriteLine($"Personaggio 2: {Personaggi[1].tipoPrincipale}");
+            Console.WriteLine($"Personaggio 3: {Personaggi[2].tipoPrincipale}");
         }
 
         public void Menu()

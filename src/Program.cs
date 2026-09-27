@@ -7,7 +7,7 @@ class MainClass
 {
     static void Main(string[] args)
     {
-        string fileDirectory = "SaveFile.json";
+        string fileDirectory = "SaveFiles/SaveFile.json";
         if (!File.Exists(fileDirectory))
         {
             Console.WriteLine("Errore! Non è presente il file di salvataggio!");
@@ -88,37 +88,64 @@ class MainClass
                                 }
                             }
 
-                            TipoDiPersonaggio tipoDiPersonaggio1 = Gilda.ScegliendoPersonaggio(1);
-                            Console.WriteLine("Nome primo personaggio: ");
-                            string name1 = Console.ReadLine() ?? "";
+                            TipoDiPersonaggio[] tipiDiPersonaggio = new TipoDiPersonaggio[3];
+                            string[] names = new string[3];
 
-                            TipoDiPersonaggio tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(2);
-                            while(tipoDiPersonaggio2 == tipoDiPersonaggio1)
+                            tipiDiPersonaggio[0] = Gilda.ScegliendoPersonaggio(1);
+                            Console.WriteLine("Nome primo personaggio: ");
+                            names[0] = Console.ReadLine() ?? "";
+
+                            tipiDiPersonaggio[1] = Gilda.ScegliendoPersonaggio(2);
+                            while(tipiDiPersonaggio[1] == tipiDiPersonaggio[0])
                             {
                                 Console.WriteLine("Scelta invalida!\nNon puoi scegliere due volte lo stesso tipo di personaggio");
-                                tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(2);
+                                tipiDiPersonaggio[1] = Gilda.ScegliendoPersonaggio(2);
                             }
                             Console.WriteLine("Nome secondo personaggio: ");
-                            string name2 = Console.ReadLine() ?? "";
+                            names[1] = Console.ReadLine() ?? "";
 
-                            TipoDiPersonaggio tipoDiPersonaggio3 = Gilda.ScegliendoPersonaggio(3);
-                            while(tipoDiPersonaggio3 == tipoDiPersonaggio2 || tipoDiPersonaggio3 == tipoDiPersonaggio1)
+                            tipiDiPersonaggio[2] = Gilda.ScegliendoPersonaggio(3);
+                            while(tipiDiPersonaggio[2] == tipiDiPersonaggio[1] || tipiDiPersonaggio[2]== tipiDiPersonaggio[0])
                             {
                                 Console.WriteLine("Scelta invalida!\nNon puoi scegliere due volte lo stesso tipo di personaggio");
-                                tipoDiPersonaggio2 = Gilda.ScegliendoPersonaggio(3);
+                                tipiDiPersonaggio[2] = Gilda.ScegliendoPersonaggio(3);
                             }
                             Console.WriteLine("Nome terzo personaggio: ");
-                            string name3 = Console.ReadLine() ?? "";
+                            names[2] = Console.ReadLine() ?? "";
 
-                            Personaggio personaggio1 = new Personaggio(tipoDiPersonaggio1, name1);
-                            Personaggio personaggio2 = new Personaggio(tipoDiPersonaggio2, name2);
-                            Personaggio personaggio3 = new Personaggio(tipoDiPersonaggio3, name3);
+                            Personaggio[] personaggi = new Personaggio[3];
+
+                            for (int i = 0; i < 3; i++)
+                            {
+                                switch(tipiDiPersonaggio[i])
+                                {
+                                    case TipoDiPersonaggio.Arciere:
+                                        personaggi[i] = new Arciere(names[i]);
+                                        break;
+
+                                    case TipoDiPersonaggio.Mago:
+                                        personaggi[i] = new Mago(names[i]);
+                                        break;
+
+                                    case TipoDiPersonaggio.Curatore:
+                                        personaggi[i] = new Curatore(names[i]);
+                                        break;
+
+                                    case TipoDiPersonaggio.Guerriero:
+                                        personaggi[i] = new Guerriero(names[i]);
+                                        break;
+
+                                    case TipoDiPersonaggio.Ladro:
+                                        personaggi[i] = new Ladro(names[i]);
+                                        break;
+                                }
+                            }
 
                             Gilda gilda = new Gilda(
                                 gildaNome,
-                                personaggio1,
-                                personaggio2,
-                                personaggio3
+                                personaggi[0],
+                                personaggi[1],
+                                personaggi[2]
                             );
 
                             gilde.Add(gilda);

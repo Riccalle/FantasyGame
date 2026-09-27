@@ -59,7 +59,7 @@ namespace LibreriaMissioni
                         break;
 
                     case 2:
-                        gilda.Inventario();
+                        // gilda.Inventario();
                         break;
 
                     case 3:

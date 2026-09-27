@@ -118,4 +118,34 @@ namespace LibreriaPersonaggi
             return danno;
         }
     }
+
+    class Curatore : Personaggio
+    {
+        public Curatore(string name)
+        {
+            tipoPrincipale = TipoDiPersonaggio.Curatore;
+            Livello = 0;
+            Name = name;
+        }
+    }
+
+    class Guerriero : Personaggio
+    {
+        public Guerriero(string name)
+        {
+            tipoPrincipale = TipoDiPersonaggio.Guerriero;
+            Livello = 0;
+            Name = name;
+        }
+    }
+
+    class Ladro : Personaggio
+    {
+        public Ladro(string name)
+        {
+            tipoPrincipale = TipoDiPersonaggio.Ladro;
+            Livello = 0;
+            Name = name;
+        }
+    }
 }
