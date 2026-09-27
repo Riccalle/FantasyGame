@@ -101,19 +101,21 @@ namespace LibreriaPersonaggi
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
 
-                    if(key.Key == Console.KeySpacebar)
+                    if(key.Key == ConsoleKey.Spacebar)
                     {
                         PotenzaAttacco += "|";
                         Console.Clear();
-                        ConsoleWrite($"\r{PotenzaAttacco}");
+                        Console.Write($"\r{PotenzaAttacco}");
                     }
                 }
                 TempoRimanente -= 0.01;
                 Thread.Sleep(10);
             }
 
-            int PotenzaAttacco = PotenzaAttacco.Length();
-            danno += PotenzaAttacco * 2; // Moltiplicatore ignoto
+            int Attacco = PotenzaAttacco.Length;
+            danno += Attacco * 2; // Moltiplicatore ignoto
+
+            return danno;
         }
     }
 }
