@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace LibreriaPersonaggi 
 {
     enum TipoDiPersonaggio
@@ -126,6 +124,78 @@ namespace LibreriaPersonaggi
             tipoPrincipale = TipoDiPersonaggio.Curatore;
             Livello = 0;
             Name = name;
+        }
+
+        static int Cura(int curaMinima)
+        {
+            int cura = curaMinima;
+            int incrementoCura = 8; // Da impostare meglio
+            int screenLinearSize = 55; // 11 X 5
+
+            char[] screen = new char[screenLinearSize];
+
+            for (int i = 0; i < screenLinearSize; i++)
+            {
+                if (i % 11 == 0) 
+                    screen[i] = '\n';
+                else 
+                    screen[i] = ' ';
+            }
+
+            float timer = 0.0f;
+            float maxTimer = 10.0f;
+
+            float refreshScreenTimer = 0.0f;
+            float refreshScreenTimerBound = 1.0f;
+
+            Random random = new Random();
+
+            while (timer < maxTimer)
+            {
+                Console.Clear();
+                timer += 0.01f;
+                refreshScreenTimer += 0.01f;
+                bool[] checker = Enumerable.Repeat(true, 5).ToArray();
+                int[] indices = new int[5];
+                if (refreshScreenTimer > refreshScreenTimerBound)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        int row = random.Next(0, 11);
+                        int col = random.Next(0, 5);
+
+                        int index = col * 11 + row;
+
+                        while (screen[index] != ' ') // Rerolling in case 
+                        {
+                            row = random.Next(0, 11);
+                            col = random.Next(0, 5);
+
+                            index = col * 11 + row;
+                        }
+
+                        indices[i] = index;
+                        screen[index] = Convert.ToChar(i);
+                    }
+                }
+                if(Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    int num = key.KeyChar;
+
+                    if (num > 0 && num <= 5 && checker[num])
+                    {
+                        checker[num] = false;
+                        screen[indices[num]] = ' ';
+                        cura += incrementoCura;
+                    }
+                }
+
+                Console.WriteLine(screen);
+                Thread.Sleep(10);
+            }
+
+            return cura;
         }
     }
 
