@@ -12,7 +12,7 @@ namespace LibreriaPersonaggi
     abstract class Personaggio // Siccome oramai la classe personaggio è astratta, bisogna andare ad aggiustare il resto del codice
     {                          // Togliendo i personaggi dichiarati con Personaggio personaggio = new... e mettendo una lista polimorfica
         public TipoDiPersonaggio tipoPrincipale {get; set;}
-        public uint Livello {get; set;} = 0;
+        public int Livello {get; set;} = 0;
         public string Name {get; set;} = "";
     }
 
@@ -126,74 +126,110 @@ namespace LibreriaPersonaggi
             Name = name;
         }
 
-        static int Cura(int curaMinima)
+        int CuraMinima()
         {
-            int cura = curaMinima;
-            int incrementoCura = 8; // Da impostare meglio
-            int screenLinearSize = 55; // 11 X 5
+            return 50 + Livello * 8;
+        }
 
-            char[] screen = new char[screenLinearSize];
+        int Cura(int incrementoCura)
+        {
+            int cura = CuraMinima();
 
-            for (int i = 0; i < screenLinearSize; i++)
+            // Schermo
+            int row = 15;
+            int col = 27;
+
+            char[,] schermo = new char[row, col];
+
+            
+
+            // Timer
+
+            double timer = 0;
+            double maxTime = 10;
+
+            double refreshTimer = 0;
+            double refreshTimerBound = 1;
+
+            Random rand = new Random();
+            List<int> numeriSulloSchermo = new List<int>();
+            List<KeyValuePair<int, int>> indiciSulloSchermo = new List<KeyValuePair<int, int>>();
+
+            // Loop principale
+
+            while (timer < maxTime)
             {
-                if (i % 11 == 0) 
-                    screen[i] = '\n';
-                else 
-                    screen[i] = ' ';
-            }
+                timer += 0.01;
+                refreshTimer += 0.01;
 
-            float timer = 0.0f;
-            float maxTimer = 10.0f;
-
-            float refreshScreenTimer = 0.0f;
-            float refreshScreenTimerBound = 1.0f;
-
-            Random random = new Random();
-
-            while (timer < maxTimer)
-            {
                 Console.Clear();
-                timer += 0.01f;
-                refreshScreenTimer += 0.01f;
-                bool[] checker = Enumerable.Repeat(true, 5).ToArray();
-                int[] indices = new int[5];
-                if (refreshScreenTimer > refreshScreenTimerBound)
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                // Ogni tot genera numeri casuali
+                if (refreshTimer > refreshTimerBound)
                 {
+                    // Pulisce lo schermo
+                    for (int i = 0; i < row; i++)
+                        for (int j = 0; j < col; j++)
+                            schermo[i, j] = ' ';
+                    indiciSulloSchermo.Clear();
+                    numeriSulloSchermo.Clear();
+                    
+                    refreshTimer = 0.0;
+
                     for (int i = 0; i < 5; i++)
                     {
-                        int row = random.Next(0, 11);
-                        int col = random.Next(0, 5);
+                        int num = rand.Next(1, 9);
+                        while (numeriSulloSchermo.Contains(num)) // Mescola se il numero c'è già
+                            num = rand.Next(1, 9);
+                        numeriSulloSchermo.Add(num);
 
-                        int index = col * 11 + row;
-
-                        while (screen[index] != ' ') // Rerolling in case 
+                        int r = rand.Next(0, row);
+                        int c = rand.Next(0, col);
+                        while (indiciSulloSchermo.Contains(new KeyValuePair<int, int>(r, c)))
                         {
-                            row = random.Next(0, 11);
-                            col = random.Next(0, 5);
-
-                            index = col * 11 + row;
+                            r = rand.Next(0, row);
+                            c = rand.Next(0, col);
                         }
+                        indiciSulloSchermo.Add(new KeyValuePair<int, int>(r, c));
 
-                        indices[i] = index;
-                        screen[index] = Convert.ToChar(i);
-                    }
+                        schermo[r, c] = (char)('0' + num);
+                    } 
                 }
+
+                // Input player 
                 if(Console.KeyAvailable)
                 {
                     ConsoleKeyInfo key = Console.ReadKey();
-                    int num = key.KeyChar;
+                    int numLetto = key.KeyChar - '0';
 
-                    if (num > 0 && num <= 5 && checker[num])
+                    for (int i = 0; i < numeriSulloSchermo.Count(); i++)
                     {
-                        checker[num] = false;
-                        screen[indices[num]] = ' ';
-                        cura += incrementoCura;
+                        if (numLetto == numeriSulloSchermo[i])
+                        {
+                            cura += incrementoCura;
+
+                            var index = indiciSulloSchermo[i];
+                            schermo[index.Key, index.Value] = ' ';
+
+                            numeriSulloSchermo.RemoveAt(i);
+                            indiciSulloSchermo.RemoveAt(i);
+                        }
                     }
                 }
 
-                Console.WriteLine(screen);
+                // Stampa schermo
+                for (int i = 0; i < row; i++)
+                {
+                    for (int j = 0; j < col; j++)
+                        Console.Write(schermo[i, j]);
+                    Console.WriteLine(); // Per cambiare riga
+                }
+
                 Thread.Sleep(10);
             }
+
+            Console.ForegroundColor = ConsoleColor.White;
 
             return cura;
         }
