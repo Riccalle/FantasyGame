@@ -131,6 +131,20 @@ namespace LibreriaPersonaggi
             return 50 + Livello * 8;
         }
 
+        private void StampaSchermo(char[,] schermo)
+        {
+            Console.Clear();
+            int row = schermo.GetLength(0);
+            int col = schermo.GetLength(1);
+
+            for (int i = 0; i < row; i++)
+            {
+                for (int j = 0; j < col; j++)
+                    Console.Write(schermo[i, j]);
+                Console.WriteLine(); // Per cambiare riga
+            }
+        }
+
         int Cura(int incrementoCura)
         {
             int cura = CuraMinima();
@@ -140,8 +154,6 @@ namespace LibreriaPersonaggi
             int col = 27;
 
             char[,] schermo = new char[row, col];
-
-            
 
             // Timer
 
@@ -155,15 +167,15 @@ namespace LibreriaPersonaggi
             List<int> numeriSulloSchermo = new List<int>();
             List<KeyValuePair<int, int>> indiciSulloSchermo = new List<KeyValuePair<int, int>>();
 
+            Console.CursorVisible = false;
+            Console.ForegroundColor = ConsoleColor.Red;
+
             // Loop principale
 
             while (timer < maxTime)
             {
                 timer += 0.01;
                 refreshTimer += 0.01;
-
-                Console.Clear();
-                Console.ForegroundColor = ConsoleColor.Red;
 
                 // Ogni tot genera numeri casuali
                 if (refreshTimer > refreshTimerBound)
@@ -194,7 +206,9 @@ namespace LibreriaPersonaggi
                         indiciSulloSchermo.Add(new KeyValuePair<int, int>(r, c));
 
                         schermo[r, c] = (char)('0' + num);
-                    } 
+                    }
+
+                    StampaSchermo(schermo);
                 }
 
                 // Input player 
@@ -211,26 +225,23 @@ namespace LibreriaPersonaggi
 
                             var index = indiciSulloSchermo[i];
                             schermo[index.Key, index.Value] = ' ';
+                            StampaSchermo(schermo);
 
                             numeriSulloSchermo.RemoveAt(i);
                             indiciSulloSchermo.RemoveAt(i);
                         }
+                        else
+                            cura -= incrementoCura / 2;
                     }
                 }
-
-                // Stampa schermo
-                for (int i = 0; i < row; i++)
-                {
-                    for (int j = 0; j < col; j++)
-                        Console.Write(schermo[i, j]);
-                    Console.WriteLine(); // Per cambiare riga
-                }
-
                 Thread.Sleep(10);
             }
 
             Console.ForegroundColor = ConsoleColor.White;
-
+            Console.CursorVisible = true;
+            
+            if (cura < 0) 
+                cura = 0;
             return cura;
         }
     }
