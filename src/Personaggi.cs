@@ -217,23 +217,30 @@ namespace LibreriaPersonaggi
                     ConsoleKeyInfo key = Console.ReadKey();
                     int numLetto = key.KeyChar - '0';
 
-                    for (int i = 0; i < numeriSulloSchermo.Count(); i++)
+                    if (numeriSulloSchermo.Contains(numLetto))
                     {
-                        if (numLetto == numeriSulloSchermo[i])
+                        for (int i = 0; i < numeriSulloSchermo.Count(); i++)
                         {
-                            cura += incrementoCura;
+                            if (numLetto == numeriSulloSchermo[i])
+                            {
+                                cura += incrementoCura;
 
-                            var index = indiciSulloSchermo[i];
-                            schermo[index.Key, index.Value] = ' ';
-                            StampaSchermo(schermo);
+                                var index = indiciSulloSchermo[i];
+                                schermo[index.Key, index.Value] = ' ';
+                                StampaSchermo(schermo);
 
-                            numeriSulloSchermo.RemoveAt(i);
-                            indiciSulloSchermo.RemoveAt(i);
+                                numeriSulloSchermo.RemoveAt(i);
+                                indiciSulloSchermo.RemoveAt(i);
+                            }
+                            else
+                                cura -= incrementoCura / 2;
                         }
-                        else
-                            cura -= incrementoCura / 2;
                     }
+
+                    else 
+                        cura -= incrementoCura / 2;
                 }
+
                 Thread.Sleep(10);
             }
 
