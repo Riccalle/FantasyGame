@@ -6,16 +6,12 @@ namespace LibreriaMissioni
     {
         abstract public void MainMenu();
         public Random random = new Random();
+        public Gilda gilda;
     }
 
     class MissioneForesta1 : Missione
     {
-        public Gilda gilda;
-
-        public MissioneForesta1(Gilda gilda)
-        {
-            this.gilda = gilda;
-        }
+        static int livello = 1;
 
         public override void MainMenu()
         {
@@ -108,5 +104,122 @@ namespace LibreriaMissioni
             Console.Clear();
             Console.WriteLine("Benvenuto nel campo");
         }
-    }   
+    }
+
+    class MissioneLago1 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione1_2 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione2_2 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione3_2 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione1_3 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione2_3 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione3_3 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione1_4 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione2_4 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione3_4 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione1_5 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione2_5 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
+
+    class Missione3_5 : Missione
+    {
+        public override void MainMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Benvenuto nel lago");
+        }
+    }
 }

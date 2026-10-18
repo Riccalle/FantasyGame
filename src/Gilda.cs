@@ -1,4 +1,5 @@
 using LibreriaPersonaggi;
+using LibreriaMissioni;
 
 namespace GildaCodice
 {
@@ -6,6 +7,49 @@ namespace GildaCodice
     {
         public string Name {get; set;} = "";
         public Personaggio[] Personaggi = new Personaggio[3];
+
+        static int numeroDiMissioni = 5;
+        private int missioneAttuale = 0; // La prima missione è quella nuemero 0
+        static Missione[,] missioniPossibili =
+        {
+            // Ci devono essere tanti elementi nella prima dimensione quanto il numero di missioni!
+            {   // Missione di livello 1
+                new MissioneForesta1(),
+                new MissioneCampo1(),
+                new MissioneLago1()
+            },
+            {
+                new Missione1_2(),
+                new Missione2_2(),
+                new Missione3_2()
+            },
+            {
+                new Missione1_3(),
+                new Missione2_3(),
+                new Missione3_3()
+            },
+            {
+                new Missione1_4(),
+                new Missione2_4(),
+                new Missione3_4()
+            },
+            {
+                new Missione1_5(),
+                new Missione2_5(),
+                new Missione3_5()
+            }
+        };
+
+        Missione[] missioni = new Missione[numeroDiMissioni];
+        private void GetMissioni() // Sceglie le missioni casualmente per ogni livello
+        {
+            Random random = new Random();
+            for (int i = 0; i < numeroDiMissioni; i++)
+            {
+                missioni[i] = missioniPossibili[i, random.Next(0, 2)]; // Ci sono tre missioni per livello (per ora)
+                missioni[i].gilda = this; // Così si può fare riferimenti alla gilda
+            }
+        }
 
         public Gilda(
             string Name, 
@@ -43,6 +87,8 @@ namespace GildaCodice
                 switch (scelta)
                 {
                     case 1:
+                        GetMissioni();
+                        missioni[missioneAttuale].MainMenu();
                         break;
 
                     case 2:
@@ -89,7 +135,7 @@ namespace GildaCodice
 
         public void Attacca()
         {
-            Console.WriteLine("");
+            Console.WriteLine("Attacco! WIP");
         }
     }
 }
